@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="DailyKit AI - everyday calculators and image tools in one simple place.">
+<title>DailyKit AI — Everyday Tools</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#f7f9fc;color:#0f172a}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.wrap{max-width:1050px;margin:auto;padding:18px}
+header{background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:0;z-index:10}.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;max-width:1050px;margin:auto}
+.brand{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:800}.logo{width:42px;height:42px;border-radius:13px;background:#0b1220;color:#22d3ee;display:grid;place-items:center;font-size:22px}.brand span{color:#06b6d4}
+.hero{text-align:center;padding:52px 12px 28px}.hero h1{font-size:clamp(36px,7vw,64px);margin:0 0 12px;letter-spacing:-2px}.hero p{font-size:18px;color:#64748b;margin:0 auto 24px;max-width:650px}
+.search{max-width:650px;margin:auto;display:flex;background:#fff;border:1px solid #dbe2ea;border-radius:18px;padding:7px;box-shadow:0 10px 30px #0f172a0b}.search input{flex:1;border:0;outline:0;padding:14px;background:transparent;min-width:0}.search button{border:0;background:#0f172a;color:#fff;border-radius:13px;padding:12px 18px}
+.tabs{display:flex;gap:8px;overflow:auto;padding:8px 0 18px}.tabs button{border:1px solid #dbe2ea;background:#fff;padding:10px 15px;border-radius:999px;white-space:nowrap}.tabs button.active{background:#0f172a;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:20px;box-shadow:0 5px 20px #0f172a06}.card h3{margin:8px 0}.icon{font-size:28px}.muted{color:#64748b}.card button,.primary{border:0;background:#06b6d4;color:#06202a;padding:11px 15px;border-radius:12px;font-weight:700;margin-top:10px}
+section.tool{display:none}.toolbox{max-width:720px;margin:25px auto;background:#fff;border:1px solid #e5e7eb;border-radius:22px;padding:22px}.toolbox h2{margin-top:0}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:#475569}.field input,.field select,.field textarea{width:100%;border:1px solid #cbd5e1;border-radius:12px;padding:12px;outline:none;background:#fff}.field textarea{min-height:130px;resize:vertical}.actions{display:flex;gap:8px;flex-wrap:wrap}.secondary{border:1px solid #cbd5e1;background:#fff;padding:11px 15px;border-radius:12px}.result{margin-top:16px;background:#f0fdfa;border:1px solid #99f6e4;border-radius:15px;padding:15px;display:none}.result strong{font-size:22px}.drop{border:2px dashed #cbd5e1;border-radius:16px;padding:28px;text-align:center}.preview{max-width:100%;max-height:280px;display:block;margin:15px auto;border-radius:12px}.notice{font-size:13px;color:#64748b;margin-top:10px}.back{border:0;background:transparent;color:#0891b2;font-weight:700;padding:0;margin-bottom:12px}
+footer{padding:40px 18px;text-align:center;color:#64748b;font-size:13px}
+@media(max-width:760px){.grid{grid-template-columns:1fr 1fr}.formgrid{grid-template-columns:1fr}.hero{padding-top:36px}.card{padding:16px}}
+@media(max-width:480px){.grid{grid-template-columns:1fr}.wrap{padding:14px}.hero h1{letter-spacing:-1.5px}}
+</style>
+</head>
+<body>
+<header><div class="nav"><div class="brand"><div class="logo">✦</div>DailyKit <span>AI</span></div><button class="secondary" onclick="home()">Home</button></div></header>
+
+<main class="wrap">
+<div id="home">
+<section class="hero">
+<h1>What do you need help with today?</h1>
+<p>Calculate, convert, compress and solve everyday tasks — all in one simple place.</p>
+<div class="search"><input id="search" placeholder="Search a tool…"><button onclick="searchTools()">Search</button></div>
+</section>
+<div class="tabs">
+<button class="active" onclick="filter('all',this)">All</button><button onclick="filter('calc',this)">Calculators</button><button onclick="filter('image',this)">Image</button><button onclick="filter('pdf',this)">PDF</button>
+</div>
+<div class="grid" id="cards">
+<div class="card toolcard calc"><div class="icon">🧮</div><h3>EMI Calculator</h3><p class="muted">Monthly EMI, interest and total payment.</p><button onclick="openTool('emi')">Open tool →</button></div>
+<div class="card toolcard calc"><div class="icon">%</div><h3>Percentage Calculator</h3><p class="muted">Find percentages, increase and decrease.</p><button onclick="openTool('percentage')">Open tool →</button></div>
+<div class="card toolcard calc"><div class="icon">🎂</div><h3>Age Calculator</h3><p class="muted">Calculate exact age from date of birth.</p><button onclick="openTool('age')">Open tool →</button></div>
+<div class="card toolcard calc"><div class="icon">🧾</div><h3>GST Calculator</h3><p class="muted">Add or remove GST quickly.</p><button onclick="openTool('gst')">Open tool →</button></div>
+<div class="card toolcard calc"><div class="icon">🏷️</div><h3>Discount Calculator</h3><p class="muted">Calculate savings and final price.</p><button onclick="openTool('discount')">Open tool →</button></div>
+<div class="card toolcard calc"><div class="icon">📈</div><h3>Profit & Loss</h3><p class="muted">Profit/loss amount and percentage.</p><button onclick="openTool('profit')">Open tool →</button></div>
+<div class="card toolcard image"><div class="icon">🖼️</div><h3>Image Compressor</h3><p class="muted">Compress JPG, PNG or WebP in your browser.</p><button onclick="openTool('compress')">Open tool →</button></div>
+<div class="card toolcard image"><div class="icon">↔️</div><h3>Image Resizer</h3><p class="muted">Resize images by width and height.</p><button onclick="openTool('resize')">Open tool →</button></div>
+<div class="card toolcard image"><div class="icon">🔄</div><h3>JPG ↔ PNG</h3><p class="muted">Convert common image formats locally.</p><button onclick="openTool('convert')">Open tool →</button></div>
+<div class="card toolcard pdf"><div class="icon">📄</div><h3>JPG to PDF</h3><p class="muted">Turn one or more images into a PDF.</p><button onclick="openTool('jpgpdf')">Open tool →</button></div>
+</div>
+</div>
+
+<section id="tool" class="tool"><button class="back" onclick="home()">← Back to tools</button><div id="toolbox" class="toolbox"></div></section>
+</main>
+<footer>DailyKit AI · Everyday tools. One simple place.</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+function home(){$('home').style.display='block';$('tool').style.display='none';window.scrollTo({top:0,behavior:'smooth'})}
+function openTool(name){$('home').style.display='none';$('tool').style.display='block';render(name);window.scrollTo({top:0,behavior:'smooth'})}
+function filter(type,btn){document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.toolcard').forEach(c=>c.style.display=(type==='all'||c.classList.contains(type))?'block':'none')}
+function searchTools(){let q=$('search').value.toLowerCase().trim();if(!q)return;let found=[...document.querySelectorAll('.toolcard')].find(c=>c.innerText.toLowerCase().includes(q));if(found){found.scrollIntoView({behavior:'smooth'});found.style.outline='3px solid #22d3ee';setTimeout(()=>found.style.outline='',1800)}else alert('No matching tool found. Try EMI, percentage, image, PDF or GST.')}
+function money(n){return Number(n).toLocaleString('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:2})}
+function box(title,html){$('toolbox').innerHTML='<h2>'+title+'</h2>'+html}
+function result(id,msg){$(id).style.display='block';$(id).innerHTML=msg}
+function render(n){
+if(n==='emi') box('EMI Calculator',`<div class="formgrid">
+<div class="field"><label>Loan Amount (₹)</label><input id="p" type="number" placeholder="500000"></div>
+<div class="field"><label>Annual Interest (%)</label><input id="r" type="number" step="0.01" placeholder="10"></div>
+<div class="field"><label>Tenure (months)</label><input id="n" type="number" placeholder="60"></div></div>
+<div class="actions"><button class="primary" onclick="calcEMI()">Calculate</button><button class="secondary" onclick="render('emi')">Clear</button></div><div id="res" class="result"></div>`);
+else if(n==='percentage') box('Percentage Calculator',`<div class="formgrid"><div class="field"><label>Value X</label><input id="x" type="number"></div><div class="field"><label>Value Y</label><input id="y" type="number"></div></div><div class="actions"><button class="primary" onclick="calcPct()">Calculate</button></div><div id="res" class="result"></div>`);
+else if(n==='age') box('Age Calculator',`<div class="field"><label>Date of Birth</label><input id="dob" type="date"></div><div class="actions"><button class="primary" onclick="calcAge()">Calculate Age</button></div><div id="res" class="result"></div>`);
+else if(n==='gst') box('GST Calculator',`<div class="formgrid"><div class="field"><label>Amount (₹)</label><input id="amt" type="number"></div><div class="field"><label>GST Rate</label><select id="gst"><option>5</option><option>12</option><option selected>18</option><option>28</option></select></div></div><div class="actions"><button class="primary" onclick="calcGST(true)">Add GST</button><button class="secondary" onclick="calcGST(false)">Remove GST</button></div><div id="res" class="result"></div>`);
+else if(n==='discount') box('Discount Calculator',`<div class="formgrid"><div class="field"><label>Original Price (₹)</label><input id="price" type="number"></div><div class="field"><label>Discount (%)</label><input id="disc" type="number"></div></div><div class="actions"><button class="primary" onclick="calcDiscount()">Calculate</button></div><div id="res" class="result"></div>`);
+else if(n==='profit') box('Profit & Loss Calculator',`<div class="formgrid"><div class="field"><label>Cost Price (₹)</label><input id="cp" type="number"></div><div class="field"><label>Selling Price (₹)</label><input id="sp" type="number"></div></div><div class="actions"><button class="primary" onclick="calcProfit()">Calculate</button></div><div id="res" class="result"></div>`);
+else if(n==='compress') box('Image Compressor',`<div class="drop"><input id="file" type="file" accept="image/jpeg,image/png,image/webp"></div><div class="formgrid" style="margin-top:12px"><div class="field"><label>Quality (10–100)</label><input id="quality" type="number" min="10" max="100" value="75"></div><div class="field"><label>Output</label><select id="fmt"><option value="image/jpeg">JPG</option><option value="image/webp">WebP</option><option value="image/png">PNG</option></select></div></div><div class="actions"><button class="primary" onclick="compressImage()">Compress & Download</button></div><div id="res" class="result"></div><canvas id="canvas" style="display:none"></canvas>`);
+else if(n==='resize') box('Image Resizer',`<div class="drop"><input id="file" type="file" accept="image/*"></div><div class="formgrid" style="margin-top:12px"><div class="field"><label>Width (px)</label><input id="w" type="number" placeholder="1080"></div><div class="field"><label>Height (px)</label><input id="h" type="number" placeholder="1080"></div></div><div class="actions"><button class="primary" onclick="resizeImage()">Resize & Download</button></div><div id="res" class="result"></div>`);
+else if(n==='convert') box('JPG ↔ PNG Converter',`<div class="drop"><input id="file" type="file" accept="image/jpeg,image/png"></div><div class="field" style="margin-top:12px"><label>Convert to</label><select id="fmt"><option value="image/png">PNG</option><option value="image/jpeg">JPG</option></select></div><div class="actions"><button class="primary" onclick="convertImage()">Convert & Download</button></div><div id="res" class="result"></div>`);
+else if(n==='jpgpdf') box('JPG to PDF',`<div class="drop"><input id="files" type="file" accept="image/jpeg,image/png,image/webp" multiple></div><p class="notice">Select one or more images. They are processed in your browser.</p><div class="actions"><button class="primary" onclick="jpgToPdf()">Create PDF & Download</button></div><div id="res" class="result"></div>`);
+}
+function calcEMI(){let P=+$('p').value,r=+$('r').value/1200,n=+$('n').value;if(P<=0||r<0||n<=0)return alert('Enter valid values.');let emi=r===0?P/n:P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);let total=emi*n;result('res',`<strong>${money(emi)}</strong><br>Monthly EMI<br><br>Total Interest: <b>${money(total-P)}</b><br>Total Payment: <b>${money(total)}</b>`)}
+function calcPct(){let x=+$('x').value,y=+$('y').value;if(y===0)return alert('Y cannot be zero.');result('res',`<strong>${(x/y*100).toFixed(2)}%</strong><br>X is this percentage of Y.<br><br><b>${x}% of ${y} = ${(x*y/100).toFixed(2)}</b>`)}
+function calcAge(){let d=new Date($('dob').value);if(isNaN(d))return alert('Select date of birth.');let now=new Date();if(d>now)return alert('Date of birth cannot be in the future.');let y=now.getFullYear()-d.getFullYear(),m=now.getMonth()-d.getMonth(),day=now.getDate()-d.getDate();if(day<0){m--;day+=new Date(now.getFullYear(),now.getMonth(),0).getDate()}if(m<0){y--;m+=12}result('res',`<strong>${y} years, ${m} months, ${day} days</strong><br>Exact age today.`)}
+function calcGST(add){let a=+$('amt').value,g=+$('gst').value;if(a<0)return alert('Enter valid amount.');if(add){let tax=a*g/100;result('res',`Base: <b>${money(a)}</b><br>GST: <b>${money(tax)}</b><br><strong>Total: ${money(a+tax)}</strong>`)}else{let base=a/(1+g/100),tax=a-base;result('res',`Original before GST: <b>${money(base)}</b><br>GST portion: <b>${money(tax)}</b><br><strong>Total: ${money(a)}</strong>`) }}
+function calcDiscount(){let p=+$('price').value,d=+$('disc').value;if(p<0||d<0)return alert('Enter valid values.');let save=p*d/100;result('res',`You save: <b>${money(save)}</b><br><strong>Final price: ${money(p-save)}</strong>`)}
+function calcProfit(){let cp=+$('cp').value,sp=+$('sp').value;if(cp<=0)return alert('Cost price must be greater than 0.');let diff=sp-cp,pct=Math.abs(diff)/cp*100;result('res',diff>=0?`<strong>Profit: ${money(diff)}</strong><br>Profit percentage: <b>${pct.toFixed(2)}%</b>`:`<strong>Loss: ${money(-diff)}</strong><br>Loss percentage: <b>${pct.toFixed(2)}%</b>`)}
+function loadImg(file,cb){if(!file)return alert('Choose an image first.');let img=new Image();img.onload=()=>cb(img);img.src=URL.createObjectURL(file)}
+function downloadData(url,name){let a=document.createElement('a');a.href=url;a.download=name;a.click()}
+function canvasOut(img,w,h,type,q){let c=$('canvas')||document.createElement('canvas');c.width=w;c.height=h;let ctx=c.getContext('2d');if(type==='image/jpeg'){ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h)}ctx.drawImage(img,0,0,w,h);return c.toDataURL(type,q)}
+function compressImage(){let f=$('file').files[0],q=Math.min(100,Math.max(10,+$('quality').value||75))/100,type=$('fmt').value;loadImg(f,img=>{let url=canvasOut(img,img.naturalWidth,img.naturalHeight,type,q);downloadData(url,'dailykit-compressed.'+(type==='image/png'?'png':type==='image/webp'?'webp':'jpg'));result('res',`Original: <b>${(f.size/1024).toFixed(1)} KB</b><br>Compressed file is ready to download.`)})}
+function resizeImage(){let f=$('file').files[0],w=+$('w').value,h=+$('h').value;loadImg(f,img=>{if(!w||!h)return alert('Enter width and height.');let url=canvasOut(img,w,h,'image/jpeg',.9);downloadData(url,'dailykit-resized.jpg');result('res',`Resized to <b>${w} × ${h}px</b>.`)})}
+function convertImage(){let f=$('file').files[0],type=$('fmt').value;loadImg(f,img=>{let url=canvasOut(img,img.naturalWidth,img.naturalHeight,type,.92);downloadData(url,'dailykit-converted.'+(type==='image/png'?'png':'jpg'));result('res','Conversion complete. Your file is ready.')})}
+async function jpgToPdf(){let files=[...$('files').files];if(!files.length)return alert('Select at least one image.');if(!window.jspdf)return alert('PDF engine is still loading. Try again.');let {jsPDF}=window.jspdf,pdf;for(let i=0;i<files.length;i++){let f=files[i];let data=await new Promise((resolve,reject)=>{let r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(f)});let img=await new Promise(resolve=>{let im=new Image();im.onload=()=>resolve(im);im.src=data});let ratio=img.width/img.height;let w=210,h=w/ratio;if(h>297){h=297;w=h*ratio}if(i===0)pdf=new jsPDF({orientation:w>h?'landscape':'portrait',unit:'mm',format:[w,h]});else pdf.addPage([w,h],w>h?'landscape':'portrait');pdf.addImage(data,f.type==='image/png'?'PNG':'JPEG',0,0,w,h)}pdf.save('dailykit-images.pdf');result('res',`Created PDF from <b>${files.length}</b> image(s).`) }
+</script>
+</body></html>
